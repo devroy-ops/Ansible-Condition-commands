@@ -1,0 +1,25 @@
+************Start***************
+
+Note:-Condition commands
+
+
+Step-1 vi condition.yml
+
+
+--- # condition playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: install apache server
+            command: apt-get -y install apache2
+            when: ansible_os_family == "Debian"
+          - name: install apache server
+            command: yum -y install httpd
+            when: ansible_os_family == "RedHat"
+
+
+Step-2 ansible-playbook condition.yml
+
+**********************END****************
